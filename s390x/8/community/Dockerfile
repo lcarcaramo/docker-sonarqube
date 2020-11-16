@@ -40,7 +40,7 @@ RUN set -eux; \
     echo "${ESUM} */tmp/openjdk.tar.gz" | sha256sum -c -; \
     mkdir -p /opt/java/openjdk; \
     cd /opt/java/openjdk; \
-    tar -xzvf /tmp/openjdk.tar.gz --strip-components=1; \
+    tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
     export PATH="/opt/java/openjdk/bin:$PATH"; \
     apk del --purge .fetch-deps; \
     rm -rf /var/cache/apk/*; \
@@ -60,7 +60,8 @@ ENV JAVA_HOME=/opt/java/openjdk \
     SQ_LOGS_DIR="/opt/sonarqube/logs" \
     SQ_TEMP_DIR="/opt/sonarqube/temp"
     
-RUN which java && java -version
+# DEBUG JAVA
+RUN echo $PATH & which java && java -version
 
 RUN set -ex \
     && addgroup -S -g 1000 sonarqube \
