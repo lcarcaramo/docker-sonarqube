@@ -40,7 +40,7 @@ RUN set -eux; \
     echo "${ESUM} */tmp/openjdk.tar.gz" | sha256sum -c -; \
     mkdir -p /opt/java/openjdk; \
     cd /opt/java/openjdk; \
-    tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
+    tar -xzvf /tmp/openjdk.tar.gz --strip-components=1; \
     export PATH="/opt/java/openjdk/bin:$PATH"; \
     apk del --purge .fetch-deps; \
     rm -rf /var/cache/apk/*; \
