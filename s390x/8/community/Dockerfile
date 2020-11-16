@@ -45,7 +45,7 @@ RUN set -eux; \
     apk del --purge .fetch-deps; \
     rm -rf /var/cache/apk/*; \
     rm -rf /tmp/openjdk.tar.gz; \
-    java -version
+    which java && java -version
 
 #
 # SonarQube setup
