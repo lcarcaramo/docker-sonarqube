@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM quay.io/ibmz/alpine:3.12
 ENV JAVA_VERSION="jdk-11.0.8+10" \
     LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
