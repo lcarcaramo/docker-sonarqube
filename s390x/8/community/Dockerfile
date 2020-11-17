@@ -14,7 +14,7 @@ RUN set -eux; \
 #
 ARG SONARQUBE_VERSION=8.5.1.38104
 ARG SONARQUBE_ZIP_URL=https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip
-ENV JAVA_HOME=/usr/bin \
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk \
     SONARQUBE_HOME=/opt/sonarqube \
     SONAR_VERSION="${SONARQUBE_VERSION}" \
     SQ_DATA_DIR="/opt/sonarqube/data" \
