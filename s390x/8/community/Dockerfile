@@ -1,6 +1,5 @@
 FROM quay.io/ibmz/alpine:3.12
-ENV JAVA_VERSION="jdk-11.0.8+10" \
-    LANG='en_US.UTF-8' \
+ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
     LC_ALL='en_US.UTF-8'
 
@@ -8,7 +7,7 @@ ENV JAVA_VERSION="jdk-11.0.8+10" \
 # AdoptOpenJDK/openjdk11 setup
 #
 RUN set -eux; \
-    apk add --no-cache --virtual .fetch-deps curl openjdk15; \
+    apk add --no-cache openjdk15 \
 
 #
 # SonarQube setup
