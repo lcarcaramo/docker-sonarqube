@@ -1,20 +1,20 @@
+FROM quay.io/ibmz/openjdk:11.0.8 AS openjdk
+
 FROM quay.io/ibmz/alpine:3.12
+
+COPY --from=openjdk "/opt/openjdk-11" "/opt/openjdk-11"
+
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
     LC_ALL='en_US.UTF-8'
-
-#
-# AdoptOpenJDK/openjdk11 setup
-#
-RUN set -eux; \
-    apk add --no-cache openjdk11
 
 #
 # SonarQube setup
 #
 ARG SONARQUBE_VERSION=8.5.1.38104
 ARG SONARQUBE_ZIP_URL=https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk \
+ENV JAVA_HOME=/opt/openjdk-11 \
+    PATH="/opt/openjdk-11/bin:$PATH" \
     SONARQUBE_HOME=/opt/sonarqube \
     SONAR_VERSION="${SONARQUBE_VERSION}" \
     SQ_DATA_DIR="/opt/sonarqube/data" \
