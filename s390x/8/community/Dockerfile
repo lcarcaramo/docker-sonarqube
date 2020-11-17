@@ -7,7 +7,7 @@ ENV LANG='en_US.UTF-8' \
 # AdoptOpenJDK/openjdk11 setup
 #
 RUN set -eux; \
-    apk add --no-cache openjdk15
+    apk add --no-cache openjdk11
 
 #
 # SonarQube setup
