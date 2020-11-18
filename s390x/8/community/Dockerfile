@@ -21,7 +21,7 @@ RUN echo $PATH & which java && java -version
 
 RUN set -ex \
     && addgroup --system --gid 1000 sonarqube \
-    && adduser --system --uid 1000 --group sonarqube --disabled-password sonarqube \
+    && adduser --system --uid 1000 --gid sonarqube --disabled-password sonarqube \
     && apt-get update && apt-get install -y --no-install-recommends \
                           gnupg \
                           unzip \
