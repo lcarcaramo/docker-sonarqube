@@ -20,7 +20,7 @@ ENV SONARQUBE_HOME=/opt/sonarqube \
 RUN echo $PATH & which java && java -version
 
 RUN set -ex \
-    && addgroup -S -g 1000 sonarqube \
+    && addgroup --system --gid 1000 sonarqube \
     && adduser -S -D -u 1000 -G sonarqube sonarqube \
     && apt-get update && apt-get install -y --no-install-recommends \
                           gnupg \
