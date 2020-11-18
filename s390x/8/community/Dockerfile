@@ -27,7 +27,6 @@ RUN set -ex \
                           unzip \
                           curl \
                           bash \
-                          su-exec \
                           ttf-dejavu \
     # pub   2048R/D26468DE 2015-05-25
     #       Key fingerprint = F118 2E81 C792 9289 21DB  CAB4 CFCA 4A29 D264 68DE
