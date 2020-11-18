@@ -1,8 +1,4 @@
-FROM quay.io/ibmz/openjdk:11.0.8 AS openjdk
-
-FROM quay.io/ibmz/alpine:3.12
-
-COPY --from=openjdk "/opt/openjdk-11" "/opt/openjdk-11"
+FROM quay.io/ibmz/openjdk:11.0.8
 
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
@@ -13,9 +9,7 @@ ENV LANG='en_US.UTF-8' \
 #
 ARG SONARQUBE_VERSION=8.5.1.38104
 ARG SONARQUBE_ZIP_URL=https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip
-ENV JAVA_HOME=/opt/openjdk-11 \
-    PATH="/opt/openjdk-11/bin:$PATH" \
-    SONARQUBE_HOME=/opt/sonarqube \
+ENV SONARQUBE_HOME=/opt/sonarqube \
     SONAR_VERSION="${SONARQUBE_VERSION}" \
     SQ_DATA_DIR="/opt/sonarqube/data" \
     SQ_EXTENSIONS_DIR="/opt/sonarqube/extensions" \
@@ -28,8 +22,13 @@ RUN echo $PATH & which java && java -version
 RUN set -ex \
     && addgroup -S -g 1000 sonarqube \
     && adduser -S -D -u 1000 -G sonarqube sonarqube \
-    && apk add --no-cache --virtual build-dependencies gnupg unzip curl \
-    && apk add --no-cache bash su-exec ttf-dejavu \
+    && apt-get update && apt-get install -y --no-install-recommends \
+                          gnupg \
+                          unzip \
+                          curl \
+                          bash \
+                          su-exec \
+                          ttf-dejavu \
     # pub   2048R/D26468DE 2015-05-25
     #       Key fingerprint = F118 2E81 C792 9289 21DB  CAB4 CFCA 4A29 D264 68DE
     # uid                  sonarsource_deployer (Sonarsource Deployer) <infra@sonarsource.com>
@@ -53,8 +52,7 @@ RUN set -ex \
     && rm -rf ${SONARQUBE_HOME}/bin/* \
     && chown -R sonarqube:sonarqube ${SONARQUBE_HOME} \
     # this 777 will be replaced by 700 at runtime (allows semi-arbitrary "--user" values)
-    && chmod -R 777 "${SQ_DATA_DIR}" "${SQ_EXTENSIONS_DIR}" "${SQ_LOGS_DIR}" "${SQ_TEMP_DIR}" \
-    && apk del --purge build-dependencies
+    && chmod -R 777 "${SQ_DATA_DIR}" "${SQ_EXTENSIONS_DIR}" "${SQ_LOGS_DIR}" "${SQ_TEMP_DIR}"
 
 COPY --chown=sonarqube:sonarqube run.sh sonar.sh ${SONARQUBE_HOME}/bin/
 
