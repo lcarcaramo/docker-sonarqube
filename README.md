@@ -10,7 +10,11 @@
 
 # How to use this image
 
-Here you'll find the Docker images for the Community Edition, Developer Edition, and Enterprise Edition of SonarQube.
+## Start a SonarQube container
+
+```console
+docker run --name healthy-sonarqube -d -p 9000:9000 quay.io/ibmz/sonarqube:8.5.1.38104
+```
 
 ## Docker Host Requirements
 
@@ -65,7 +69,7 @@ For upgrade instructions, see Upgrading from the Docker Image on the [Upgrade th
 In some environments, it may make more sense to prepare a custom image containing your configuration. A `Dockerfile` to achieve this may be as simple as:
 
 ```dockerfile
-FROM sonarqube:8.2-community
+FROM quay.io/ibmz/sonarqube:8.5.1.38104
 COPY sonar.properties /opt/sonarqube/conf/
 ```
 
@@ -81,7 +85,7 @@ $ docker run -ti sonarqube-custom
 Starting from SonarQube 7.8, SonarQube stops gracefully, waiting for any tasks in progress to finish. Waiting for in-progress tasks to finish can take a large amount of time which the docker does not expect by default when stopping. To avoid having the SonarQube instance killed by the Docker daemon after 10 seconds, it is best to configure a timeout to stop the container with `--stop-timeout`. For example:
 
 ```console
-docker run --stop-timeout 3600 sonarqube
+docker run --stop-timeout 3600 quay.io/ibmz/sonarqube:8.5.1.38104
 ```
 
 ## Administration
