@@ -9,6 +9,7 @@ env:
     - REPO="quay.io/ibmz/sonarqube"
     - TAG="$REPO:8.5.1.38104"
 before_script: 
+  - cd $BUILD_DIR && chmod +x run.sh sonar.sh
   - cd $TEST_DIR && chmod +x $TEST_SCRIPT
   - docker login quay.io -u $ROBOT -p $ROBOT_TOKEN
 script: 
