@@ -26,7 +26,7 @@ if [[ "$1" = 'bin/sonar.sh' ]]; then
     # Allow the container to be started with `--user`
     if [[ "$(id -u)" = '0' ]]; then
         chown -R sonarqube:sonarqube "${SQ_DATA_DIR}" "${SQ_EXTENSIONS_DIR}" "${SQ_LOGS_DIR}" "${SQ_TEMP_DIR}"
-        exec su-exec sonarqube "$0" "$@"
+        exec gosu sonarqube "$0" "$@"
     fi
 
     #
