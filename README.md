@@ -13,7 +13,7 @@
 ## Start a SonarQube container
 
 ```console
-docker run --name healthy-sonarqube -d -p 9000:9000 quay.io/ibmz/sonarqube:8.5.1.38104
+docker run --name sonarqube -d -p 9000:9000 quay.io/ibmz/sonarqube:8.5.1.38104
 ```
 
 ## Docker Host Requirements
