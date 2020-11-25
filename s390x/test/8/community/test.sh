@@ -68,9 +68,21 @@ suite_start
         print_test_case "It starts, serves a web page, and is healthy:"
                 build "sonarqube-with-curl"
                 docker run --name healthy-sonarqube -d -p 9000:9000 "sonarqube-with-curl"
-                wait_until_ready 10
-                docker exec healthy-sonarqube curl --fail -X GET -I localhost:9000 | grep 200
-                print_success "Success! Sonarqube is up and healthy."
+                echo -e "\n${ANSI_CYAN}Started SonarQube from the quay.io/ibmz/sonarqube:8.5.1.38104 image.${ANSI_RESET}"
+                wait_until_ready 40
+                echo -e "\n${ANSI_CYAN}Performing health check...${ANSI_RESET}\n"
+                export HEALTH=$(docker exec healthy-sonarqube curl -u admin:admin http://localhost:9000/api/system/health)
+                if [ "$HEALTH" == '{"health":"GREEN","causes":[]}' ]; then
+                        print_success "Success! Sonarqube is up and healthy."
+                else
+                        if [ "$HEALTH" == "" ]; then
+                                export HEALTH="None"
+                        fi
+
+                        echo -e "\n${ANSI_RED}Recieved response: ${HEALTH}${ANSI_RESET}\n"
+                        docker rm -f healthy-sonarqube
+                        exit 1
+                fi
                 docker rm -f healthy-sonarqube
                 cleanup "sonarqube-with-curl"
 suite_end
