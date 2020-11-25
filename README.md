@@ -8,6 +8,11 @@
 
 ![logo](https://raw.githubusercontent.com/docker-library/docs/84479f149eb7d748d5dc057665eb96f923e60dc1/sonarqube/logo.png)
 
+# :warning: Security
+Ensure that you are treating all SonarQube instances that handle proprietary/internal source code as production SonarQube instances by implementing all of the security features that you would implement on any internal production system.
+
+See the [SonarQube Security](https://docs.sonarqube.org/latest/instance-administration/security/) documentation to learn how to enable application level security in SonarQube.
+
 # How to use this image
 
 ## Start a SonarQube container
