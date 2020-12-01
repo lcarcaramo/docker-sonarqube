@@ -21,19 +21,6 @@ See the [SonarQube Security](https://docs.sonarqube.org/latest/instance-administ
 docker run --name sonarqube -d -p 9000:9000 quay.io/ibmz/sonarqube:8.5.1.38104
 ```
 
-## Docker Host Requirements
-
-Because SonarQube uses an embedded Elasticsearch, make sure that your Docker host configuration complies with the [Elasticsearch production mode requirements](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) and [File Descriptors configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html).
-
-For example, on Linux, you can set the recommended values for the current session by running the following commands as root on the host:
-
-```console
-sysctl -w vm.max_map_count=262144
-sysctl -w fs.file-max=65536
-ulimit -n 65536
-ulimit -u 4096
-```
-
 ## Get Started in Two Minutes Guide
 
 To quickly run a demo instance, see Using Docker on the [Get Started in Two Minutes Guide](https://docs.sonarqube.org/latest/setup/get-started-2-minutes/) page. When you are ready to move to a more sustainable setup, take some time to read the **Configuration** section below.
