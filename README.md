@@ -1,8 +1,10 @@
 # Tags
-> _Built from [`quay.io/ibmz/openjdk:11.0.8`](https://quay.io/repository/ibmz/openjdk?tab=info)_
--	[`8.5.1.38104`](https://github.com/lcarcaramo/docker-sonarqube/blob/master/s390x/8/community/Dockerfile) - [![Build Status](https://travis-ci.com/lcarcaramo/docker-sonarqube.svg?branch=master)](https://travis-ci.com/lcarcaramo/docker-sonarqube)
+> _Built from [`quay.io/ibm/openjdk:11.0.8`](https://quay.io/repository/ibm/openjdk?tab=info)_
+-	`8.5.1.38104` - [![Build Status](https://travis-ci.com/lcarcaramo/docker-sonarqube.svg?branch=master)](https://travis-ci.com/lcarcaramo/docker-sonarqube)
 
-# What is SonarQube?
+### __[Original Source Code](https://github.com/SonarSource/docker-sonarqube)__
+
+# SonarQube
 
 [SonarQube](https://www.sonarqube.org/) is an open source product for continuous inspection of code quality.
 
@@ -18,7 +20,7 @@ See the [SonarQube Security](https://docs.sonarqube.org/latest/instance-administ
 ## Start a SonarQube container
 
 ```console
-docker run --name sonarqube -d -p 9000:9000 quay.io/ibmz/sonarqube:8.5.1.38104
+docker run --name sonarqube -d -p 9000:9000 quay.io/ibm/sonarqube:8.5.1.38104
 ```
 
 ## Get Started in Two Minutes Guide
@@ -61,7 +63,7 @@ For upgrade instructions, see Upgrading from the Docker Image on the [Upgrade th
 In some environments, it may make more sense to prepare a custom image containing your configuration. A `Dockerfile` to achieve this may be as simple as:
 
 ```dockerfile
-FROM quay.io/ibmz/sonarqube:8.5.1.38104
+FROM quay.io/ibm/sonarqube:8.5.1.38104
 COPY sonar.properties /opt/sonarqube/conf/
 ```
 
@@ -77,7 +79,7 @@ $ docker run -ti sonarqube-custom
 Starting from SonarQube 7.8, SonarQube stops gracefully, waiting for any tasks in progress to finish. Waiting for in-progress tasks to finish can take a large amount of time which the docker does not expect by default when stopping. To avoid having the SonarQube instance killed by the Docker daemon after 10 seconds, it is best to configure a timeout to stop the container with `--stop-timeout`. For example:
 
 ```console
-docker run --stop-timeout 3600 quay.io/ibmz/sonarqube:8.5.1.38104
+docker run --stop-timeout 3600 quay.io/ibm/sonarqube:8.5.1.38104
 ```
 
 ## Administration
